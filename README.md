@@ -5,12 +5,21 @@ This is a picture puzzle game that uses Te Reo Maori words and proverbs. The gam
 made by me as a personal project to learn JavaFX and to learn more about the Maori language and culture.
 Using a number of different resources, I was able to create a game that is both fun and educational.
 
+## Screenshots of the Application ---------------------------------------------
+
 
 ### Language and Tools --------------------------------------------------------
 * Java
 * JavaFX
 * IntelliJ IDE
 * Git and GitHub
+
+## How to Run -----------------------------------------------------------------
+1. Clone the repository to your local machine
+2. Open the project in IntelliJ
+3. Run the Main.java file
+4. Enjoy the game!
+
 
 ### Sources and References -----------------------------------------------------
 * [Te Reo Maori - Dictionary](https://www.maoridictionary.co.nz/)
