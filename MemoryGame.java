@@ -83,14 +83,10 @@ public class MemoryGame {
 
     public static void printBoard(String[] board)
     {
-<<<<<<< HEAD
-        for (String s : board) {
-            System.out.print("| " + s + " ");
-=======
-        for (int i = 0; i < board.length; i++) {
-            System.out.print("| " + board[i] + " ");
->>>>>>> origin/main
+        System.out.println("Board:");
+        for (String card : board) {
+            System.out.print(card + " ");
         }
-        System.out.println("|");
+        System.out.println();
     }
 }
