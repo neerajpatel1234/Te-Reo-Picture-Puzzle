@@ -1,7 +1,7 @@
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
-class referace extends JFrame implements ActionListener{
+class reference extends JFrame implements ActionListener{
     JButton b1,b2,b3,b4,b5,b6,b7,b8,b9,sample,starB;
     Icon star;
     Icon ic0=new ImageIcon("pic/starB0.jpg");
@@ -40,7 +40,7 @@ class referace extends JFrame implements ActionListener{
     Icon ic28=new ImageIcon("pic/22.jpg");
     Icon ic29=new ImageIcon("pic/26.jpg");
 
-    referace(){
+    reference(){
 
         super("pic puzzle");
 
@@ -266,6 +266,6 @@ class referace extends JFrame implements ActionListener{
     }//end of actionPerformed
 
     public static void main(String args[]){
-        new referace();
+        new reference();
     }//end of main
 }//end of class
