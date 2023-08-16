@@ -7,7 +7,6 @@ Using a number of different resources, I was able to create a game that is both 
 
 ## Screenshots of the Application ---------------------------------------------
 
-
 ### Language and Tools --------------------------------------------------------
 * Java
 * JavaFX
