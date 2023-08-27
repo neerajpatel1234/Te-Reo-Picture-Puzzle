@@ -15,8 +15,8 @@ Using a number of different resources, I was able to create a game that is both 
 
 ## How to Run -----------------------------------------------------------------
 1. Clone the repository to your local machine
-2. Open the project in IntelliJ
-3. Run the Main.java file
+2. Open the project in IntelliJ or your preferred IDE
+3. Run the GUI.java file
 4. Enjoy the game!
 
 
