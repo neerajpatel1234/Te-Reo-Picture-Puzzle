@@ -1,6 +1,5 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import javax.lang.model.element.NestingKind;
+import java.util.*;
 
 /**
  * Game.java
@@ -16,6 +15,8 @@ public class Game {
     static ArrayList<Phrase> phrasesList = new ArrayList<>();
     static ArrayList<Word> wordsList = new ArrayList<>();
     static HashMap<String, Colour> coloursList = new HashMap<>();
+
+    static HashSet<String> used = new HashSet<>();
 
     // ---------------------------------------------- MAIN METHOD ---------------------------------------------- //
     /**
@@ -49,27 +50,157 @@ public class Game {
     public static void runTurn() {
         int randomNum = (int) (Math.random() * 3);
         switch (randomNum) {
-            //Todo add a case for the colour turn
-
+            case 0 -> runColourTurn();
+            case 1 -> runWordTurn();
+            case 2 -> runPhraseTurn();
+            default -> throw new IllegalArgumentException("Invalid random number generated");
         }
     }
 
     /**
-     * This method will run a turn for the game.
+     * This method will run the colour turn for the game.
      */
-    private void runColourTurn() {
+    private static void runColourTurn() {
+        // ----- Print Te Reo Colour ----- //
+        System.out.println("What is the English translation of: ");
+        String colourName = getNameFromList(new ArrayList<>(coloursList.values()));
+        System.out.print(colourName + "\n");
+
+        // ----- Validate user input ----- //
+        String userInput = getPlayerInput();
+        userInput = userInput.toUpperCase();
+        colourName = colourName.toUpperCase();
+
+        if (userInput.equals(colourName)) {
+            System.out.println("Correct!");
+            score++;
+        } else {
+            System.out.println("Incorrect!");
+            System.out.println("The correct answer was: " + colourName);
+            incorrectAnswers++;
+        }
+
+        // ----- Print score ----- //
+        System.out.println("    Score: " + score + "\nIncorrect Answers: " + incorrectAnswers);
+        System.out.println("----------------------------------------------------");
     }
 
     /**
-     * This method will run a turn for the game.
+     * This method will run the word turn for the game.
      */
-    private void runWordTurn() {
+    private static void runWordTurn() {
+        // ----- Print Te Reo Word ----- //
+        System.out.println("What is the English translation of: ");
+        String wordName = getNameFromList(wordsList);
+        System.out.print(wordName + "\n");
+
+        // ----- Validate user input ----- //
+        String userInput = getPlayerInput();
+        userInput = userInput.toUpperCase();
+        wordName = wordName.toUpperCase();
+
+        if (userInput.equals(wordName)) {
+            System.out.println("Correct!");
+            score++;
+        } else {
+            System.out.println("Incorrect!");
+            System.out.println("The correct answer was: " + wordName);
+            incorrectAnswers++;
+        }
+
+        // ----- Print score ----- //
+        System.out.println("    Score: " + score + "\nIncorrect Answers: " + incorrectAnswers);
+        System.out.println("----------------------------------------------------");
     }
 
     /**
-     * This method will run a turn for the game.
+     * This method will run the phrase turn for the game.
      */
-    private void runPhraseTurn() {
+    private static void runPhraseTurn() {
+        // ----- Print Te Reo Phrase ----- //
+        System.out.println("What is the English translation of: ");
+        String phraseName = getNameFromList(phrasesList);
+        System.out.print(phraseName + "\n");
+
+        // ----- Validate user input ----- //
+        String userInput = getPlayerInput();
+        userInput = userInput.toUpperCase();
+        phraseName = phraseName.toUpperCase();
+
+        if (userInput.equals(phraseName)) {
+            System.out.println("Correct!");
+            score++;
+        } else {
+            System.out.println("Incorrect!");
+            System.out.println("The correct answer was: " + phraseName);
+            incorrectAnswers++;
+        }
+
+        // ----- Print score ----- //
+        System.out.println("    Score: " + score + "\nIncorrect Answers: " + incorrectAnswers);
+        System.out.println("----------------------------------------------------");
+
+    }
+
+
+    /**
+     * This method will get a random name from a list.
+     * @param list The list to get the name from.
+     * @return The name from the list.
+     */
+    private static String getNameFromList(ArrayList<?> list) {
+        if (list.get(0) instanceof Phrase) {
+            while (true) {
+                int randNum = getRandNum(list.size());
+                Phrase phrase = (Phrase) list.get(randNum);
+                String phraseName = phrase.phrase().toUpperCase();
+                if (!used.contains(phraseName)) {
+                    used.add(phraseName);
+                    return phraseName;
+                }
+            }
+        } else if (list.get(0) instanceof Word) {
+            while (true) {
+                int randNum = getRandNum(list.size());
+                Word word = (Word) list.get(randNum);
+                String wordName = word.name().toUpperCase();
+                if (!used.contains(wordName)) {
+                    used.add(wordName);
+                    return wordName;
+                }
+            }
+        } else if (list.get(0) instanceof Colour) {
+            while (true) {
+                int randNum = getRandNum(list.size());
+                Colour colour = (Colour) list.get(randNum);
+                String colourName = colour.name().toUpperCase();
+                if (!used.contains(colourName)) {
+                    used.add(colourName);
+                    return colourName;
+                }
+            }
+        } else {
+            throw new IllegalArgumentException("Invalid list type");
+        }
+    }
+
+
+    /**
+     * This method will get the player input.
+     * @return The player input via the console.
+     */
+    public static String getPlayerInput() {
+        String input = "";
+        while (input.isEmpty()) {
+            if (System.console() != null) {
+                input = System.console().readLine();
+            } else {
+                System.out.println("No console available. Please provide input:");
+                Scanner scanner = new Scanner(System.in);
+                input = scanner.nextLine();
+            }
+        }
+        return input.toUpperCase();
     }
 
     // ---------------------------------------------- SETUP TE REO OBJECTS ---------------------------------------------- //
@@ -173,6 +304,10 @@ public class Game {
 
     public HashMap<String, Colour> getColoursList() {
         return coloursList;
+    }
+
+    public static int getRandNum(int max) {
+        return (int) (Math.random() * max);
     }
 
 
