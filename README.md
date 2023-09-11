@@ -1,4 +1,4 @@
-# Te-Reo-Picture-Puzzle
+# Te-Reo-Picture-Puzzle (in progress)
 
 ## Description ---------------------------------------------------------------
 This is a picture puzzle game that uses Te Reo Maori words and proverbs. The game was 
