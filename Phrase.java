@@ -1,3 +1,8 @@
+/**
+ * A Phrase objeect with the Moari phrase and the English translation
+ * @param phrase
+ * @param englishPhrase
+ */
 record Phrase(String phrase, String englishPhrase) {
     Phrase {
         if (phrase == null || englishPhrase == null) {

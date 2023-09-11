@@ -1,3 +1,8 @@
+/**
+ * Colour object with maori name and english name
+ * @param name
+ * @param englishName
+ */
 record Colour(String name, String englishName) {
     Colour {
         if (name == null || englishName == null) {

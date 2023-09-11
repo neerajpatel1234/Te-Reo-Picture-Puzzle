@@ -1,3 +1,8 @@
+/**
+ * A record to store a word and its definition
+ * @param name
+ * @param definition
+ */
 record Word(String name, String definition) {
     Word {
         if (name == null || definition == null) {
