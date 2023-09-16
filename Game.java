@@ -1,4 +1,3 @@
-import javax.lang.model.element.NestingKind;
 import java.util.*;
 
 /**
@@ -35,7 +34,7 @@ public class Game {
      * This method will start the game.
      */
     public static void startGame() {
-        System.out.println("--------- Welcome to the Te Reo Māori game! ---------");
+        System.out.println("--------- Welcome to the Te Reo Māori game! --------- \n");
         incorrectAnswers = 0;
         score = 0;
         while (gameRunning) {
@@ -51,8 +50,8 @@ public class Game {
         int randomNum = (int) (Math.random() * 3);
         switch (randomNum) {
             case 0 -> runColourTurn();
-            //case 1 -> runWordTurn();
-            //case 2 -> runPhraseTurn();
+            case 1 -> runWordTurn();
+            case 2 -> runPhraseTurn();
             default -> throw new IllegalArgumentException("Invalid random number generated");
         }
     }
@@ -62,27 +61,71 @@ public class Game {
      */
     private static void runColourTurn() {
         // ----- Print Te Reo Colour ----- //
-        System.out.println("What is the English translation of: ");
-        String colourName = getNameFromList(new ArrayList<>(coloursList.values()));
-        System.out.print(colourName + "\n");
+        Colour ansColour = coloursList.entrySet().stream().skip(getRandNum(coloursList.size())).findFirst().get().getValue();
+        System.out.println("What is the English translation of: " + ansColour.name() + "? ");
 
-        // ----- Validate user input ----- //
-        String userInput = getPlayerInput();
-        userInput = userInput.toUpperCase();
-        colourName = colourName.toUpperCase();
+        // ----- Get & Check player input ----- //
+        String playerInput = getPlayerInput();
 
-        if (userInput.equals(colourName)) {
+        if (playerInput.equals(ansColour.englishName().toUpperCase())) {
             System.out.println("Correct!");
             score++;
         } else {
-            System.out.println("Incorrect!");
-            System.out.println("The correct answer was: " + colourName);
+            System.out.println("Incorrect! The correct answer was: " + ansColour.englishName());
             incorrectAnswers++;
         }
 
         // ----- Print score ----- //
-        System.out.println("    Score: " + score + "\nIncorrect Answers: " + incorrectAnswers);
-        System.out.println("----------------------------------------------------");
+        System.out.println("    Score: " + score + ",  Incorrect Answers: " + incorrectAnswers);
+        System.out.println("---------------------------------------------------- \n");
+    }
+
+    /**
+     * This method will run the word turn for the game.
+     */
+    private static void runWordTurn() {
+        // ----- Print Te Reo Word ----- //
+        Word ansWord = wordsList.get(getRandNum(wordsList.size()));
+        System.out.println("What is the English translation of: " + ansWord.name() + "? ");
+
+        // ----- Get & Check player input ----- //
+        String playerInput = getPlayerInput();
+
+        if (playerInput.equals(ansWord.definition().toUpperCase())) {
+            System.out.println("Correct!");
+            score++;
+        } else {
+            System.out.println("Incorrect! The correct answer was: " + ansWord.definition());
+            incorrectAnswers++;
+        }
+
+        // ----- Print score ----- //
+        System.out.println("    Score: " + score + ",  Incorrect Answers: " + incorrectAnswers);
+        System.out.println("---------------------------------------------------- \n");
+    }
+
+    /**
+     * This method will run the phrase turn for the game.
+     */
+    private static void runPhraseTurn() {
+        // ----- Print Te Reo Phrase ----- //
+        Phrase ansPhrase = phrasesList.get(getRandNum(phrasesList.size()));
+        System.out.println("What is the English translation of: " + ansPhrase.phrase() + "? ");
+
+        // ----- Get & Check player input ----- //
+        String playerInput = getPlayerInput();
+
+        if (playerInput.equals(ansPhrase.englishPhrase().toUpperCase())) {
+            System.out.println("Correct!");
+            score++;
+        } else {
+            System.out.println("Incorrect! The correct answer was: " + ansPhrase.englishPhrase());
+            incorrectAnswers++;
+        }
+
+        // ----- Print score ----- //
+        System.out.println("    Score: " + score + ",  Incorrect Answers: " + incorrectAnswers);
+        System.out.println("---------------------------------------------------- \n");
     }
 
 
@@ -127,6 +170,16 @@ public class Game {
         }
     }
      */
+
+
+    /**
+     * This method will get a random number.
+     * @param size The size of the list.
+     * @return The random number.
+     */
+    private static int getRandNum(int size) {
+        return (int) (Math.random() * size);
+    }
 
 
     /**
@@ -250,9 +303,5 @@ public class Game {
         return coloursList;
     }
 
-    public static int getRandNum(int max) {
-        return (int) (Math.random() * max);
-    }
-
-
 }
+
