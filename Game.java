@@ -7,14 +7,13 @@ import java.util.*;
  */
 public class Game {
     // ---------------------------------------------- CONSTANTS ---------------------------------------------- //
-    static boolean gameRunning = true;
     static int score = 0;
     static int incorrectAnswers = 0;
+    static boolean gameRunning = true;
 
     static ArrayList<Phrase> phrasesList = new ArrayList<>();
     static ArrayList<Word> wordsList = new ArrayList<>();
     static HashMap<String, Colour> coloursList = new HashMap<>();
-
     static HashSet<String> used = new HashSet<>();
 
     // ---------------------------------------------- MAIN METHOD ---------------------------------------------- //
@@ -29,7 +28,6 @@ public class Game {
         startGame();
     }
 
-    // ---------------------------------------------- METHODS ---------------------------------------------- //
     /**
      * This method will start the game.
      */
@@ -37,12 +35,19 @@ public class Game {
         System.out.println("--------- Welcome to the Te Reo Māori game! --------- \n");
         incorrectAnswers = 0;
         score = 0;
+
         while (gameRunning) {
             runTurn();
+            if (incorrectAnswers >= 3) {
+                gameRunning = false;
+            }
         }
 
+        System.out.println("-------------------- !GAME OVER! --------------------");
+        System.out.println("          Final Score: " + score + ",  Incorrect Answers: " + incorrectAnswers);
     }
 
+    // ---------------------------------------------- RUN TURN METHOD ---------------------------------------------- //
     /**
      * This method will run a turn for the game.
      */
@@ -56,12 +61,21 @@ public class Game {
         }
     }
 
+    // ---------------------------------------------- RUN COLOUR METHOD ---------------------------------------------- //
     /**
      * This method will run the colour turn for the game.
      */
     private static void runColourTurn() {
         // ----- Print Te Reo Colour ----- //
-        Colour ansColour = coloursList.entrySet().stream().skip(getRandNum(coloursList.size())).findFirst().get().getValue();
+        Colour ansColour = null;
+        while (ansColour == null) {
+            int randNum = getRandNum(coloursList.size());
+            ansColour = coloursList.get(coloursList.keySet().toArray()[randNum]);
+            if (used.contains(ansColour.name())) {
+                ansColour = null;
+            }
+        }
+        used.add(ansColour.name());
         System.out.println("What is the English translation of: " + ansColour.name() + "? ");
 
         // ----- Get & Check player input ----- //
@@ -80,12 +94,21 @@ public class Game {
         System.out.println("---------------------------------------------------- \n");
     }
 
+    // ---------------------------------------------- RUN WORD METHOD ---------------------------------------------- //
     /**
      * This method will run the word turn for the game.
      */
     private static void runWordTurn() {
         // ----- Print Te Reo Word ----- //
-        Word ansWord = wordsList.get(getRandNum(wordsList.size()));
+        Word ansWord = null;
+        while (ansWord == null) {
+            int randNum = getRandNum(wordsList.size());
+            ansWord = wordsList.get(randNum);
+            if (used.contains(ansWord.name())) {
+                ansWord = null;
+            }
+        }
+        used.add(ansWord.name());
         System.out.println("What is the English translation of: " + ansWord.name() + "? ");
 
         // ----- Get & Check player input ----- //
@@ -104,12 +127,21 @@ public class Game {
         System.out.println("---------------------------------------------------- \n");
     }
 
+    // ---------------------------------------------- RUN PHRASE METHOD ---------------------------------------------- //
     /**
      * This method will run the phrase turn for the game.
      */
     private static void runPhraseTurn() {
         // ----- Print Te Reo Phrase ----- //
-        Phrase ansPhrase = phrasesList.get(getRandNum(phrasesList.size()));
+        Phrase ansPhrase = null;
+        while (ansPhrase == null) {
+            int randNum = getRandNum(phrasesList.size());
+            ansPhrase = phrasesList.get(randNum);
+            if (used.contains(ansPhrase.phrase())) {
+                ansPhrase = null;
+            }
+        }
+        used.add(ansPhrase.phrase());
         System.out.println("What is the English translation of: " + ansPhrase.phrase() + "? ");
 
         // ----- Get & Check player input ----- //
@@ -129,55 +161,15 @@ public class Game {
     }
 
 
-    /**
-     * This method will get a random name from a list.
-     * @param list The list to get the name from.
-     * @return The name from the list.
 
-    private static String getNameFromList(ArrayList<?> list) {
-        if (list.get(0) instanceof Phrase) {
-            while (true) {
-                int randNum = getRandNum(list.size());
-                Phrase phrase = (Phrase) list.get(randNum);
-                String phraseName = phrase.phrase().toUpperCase();
-                if (!used.contains(phraseName)) {
-                    used.add(phraseName);
-                    return phraseName;
-                }
-            }
-        } else if (list.get(0) instanceof Word) {
-            while (true) {
-                int randNum = getRandNum(list.size());
-                Word word = (Word) list.get(randNum);
-                String wordName = word.name().toUpperCase();
-                if (!used.contains(wordName)) {
-                    used.add(wordName);
-                    return wordName;
-                }
-            }
-        } else if (list.get(0) instanceof Colour) {
-            while (true) {
-                int randNum = getRandNum(list.size());
-                Colour colour = (Colour) list.get(randNum);
-                String colourName = colour.name().toUpperCase();
-                if (!used.contains(colourName)) {
-                    used.add(colourName);
-                    return colourName;
-                }
-            }
-        } else {
-            throw new IllegalArgumentException("Invalid list type");
-        }
-    }
-     */
-
+    // ---------------------------------------------- HELPER METHODS ---------------------------------------------- //
 
     /**
      * This method will get a random number.
      * @param size The size of the list.
      * @return The random number.
      */
-    private static int getRandNum(int size) {
+    static int getRandNum(int size) {
         return (int) (Math.random() * size);
     }
 
@@ -256,51 +248,12 @@ public class Game {
     }
 
     // ---------------------------------------------- SETTERS ---------------------------------------------- //
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    public void setIncorrectAnswers(int incorrectAnswers) {
-        this.incorrectAnswers = incorrectAnswers;
-    }
-
-    public void setPhrasesList(ArrayList<Phrase> phrasesList) {
-        this.phrasesList = phrasesList;
-    }
-
-    public void setWordsList(ArrayList<Word> wordsList) {
-        this.wordsList = wordsList;
-    }
-
-    public void setColoursList(HashMap<String, Colour> coloursList) {
-        this.coloursList = coloursList;
-    }
 
 
     // ---------------------------------------------- GETTERS ---------------------------------------------- //
 
-    public int getScore() {
-        return score;
-    }
-
-    public int getIncorrectAnswers() {
-        return incorrectAnswers;
-    }
-
     public String toString() {
         return "Score: " + score + "\nIncorrect Answers: " + incorrectAnswers;
-    }
-
-    public ArrayList<Phrase> getPhrasesList() {
-        return phrasesList;
-    }
-
-    public ArrayList<Word> getWordsList() {
-        return wordsList;
-    }
-
-    public HashMap<String, Colour> getColoursList() {
-        return coloursList;
     }
 
 }
