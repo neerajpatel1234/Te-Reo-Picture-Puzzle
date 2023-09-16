@@ -51,8 +51,8 @@ public class Game {
         int randomNum = (int) (Math.random() * 3);
         switch (randomNum) {
             case 0 -> runColourTurn();
-            case 1 -> runWordTurn();
-            case 2 -> runPhraseTurn();
+            //case 1 -> runWordTurn();
+            //case 2 -> runPhraseTurn();
             default -> throw new IllegalArgumentException("Invalid random number generated");
         }
     }
@@ -85,69 +85,12 @@ public class Game {
         System.out.println("----------------------------------------------------");
     }
 
-    /**
-     * This method will run the word turn for the game.
-     */
-    private static void runWordTurn() {
-        // ----- Print Te Reo Word ----- //
-        System.out.println("What is the English translation of: ");
-        String wordName = getNameFromList(wordsList);
-        System.out.print(wordName + "\n");
-
-        // ----- Validate user input ----- //
-        String userInput = getPlayerInput();
-        userInput = userInput.toUpperCase();
-        wordName = wordName.toUpperCase();
-
-        if (userInput.equals(wordName)) {
-            System.out.println("Correct!");
-            score++;
-        } else {
-            System.out.println("Incorrect!");
-            System.out.println("The correct answer was: " + wordName);
-            incorrectAnswers++;
-        }
-
-        // ----- Print score ----- //
-        System.out.println("    Score: " + score + "\nIncorrect Answers: " + incorrectAnswers);
-        System.out.println("----------------------------------------------------");
-    }
-
-    /**
-     * This method will run the phrase turn for the game.
-     */
-    private static void runPhraseTurn() {
-        // ----- Print Te Reo Phrase ----- //
-        System.out.println("What is the English translation of: ");
-        String phraseName = getNameFromList(phrasesList);
-        System.out.print(phraseName + "\n");
-
-        // ----- Validate user input ----- //
-        String userInput = getPlayerInput();
-        userInput = userInput.toUpperCase();
-        phraseName = phraseName.toUpperCase();
-
-        if (userInput.equals(phraseName)) {
-            System.out.println("Correct!");
-            score++;
-        } else {
-            System.out.println("Incorrect!");
-            System.out.println("The correct answer was: " + phraseName);
-            incorrectAnswers++;
-        }
-
-        // ----- Print score ----- //
-        System.out.println("    Score: " + score + "\nIncorrect Answers: " + incorrectAnswers);
-        System.out.println("----------------------------------------------------");
-
-    }
-
 
     /**
      * This method will get a random name from a list.
      * @param list The list to get the name from.
      * @return The name from the list.
-     */
+
     private static String getNameFromList(ArrayList<?> list) {
         if (list.get(0) instanceof Phrase) {
             while (true) {
@@ -183,6 +126,7 @@ public class Game {
             throw new IllegalArgumentException("Invalid list type");
         }
     }
+     */
 
 
     /**
