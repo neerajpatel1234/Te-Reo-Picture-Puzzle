@@ -6,12 +6,11 @@ made by me as a personal project to learn JavaFX and to learn more about the Mao
 Using a number of different resources, I was able to create a game that is both fun and educational.
 
 ## Screenshots of the Application 
+    
+    ### Text Version of the Game (below)
+    !<img width="500" alt="image" src="https://github.com/neerajpatel1234/Te-Reo-Picture-Puzzle/assets/114114241/e9cd76bc-7ea8-4539-9603-8f398527847f">
 
-
-| !<img width="500" alt="image" src="https://github.com/neerajpatel1234/Te-Reo-Picture-Puzzle/assets/114114241/e9cd76bc-7ea8-4539-9603-8f398527847f">
-
-|:---------------------------------------------------------------------------------:| 
-|                                      *Space*                                      |
+    ### GUI Version of the Game (below)
 
 
 ### Language and Tools 
