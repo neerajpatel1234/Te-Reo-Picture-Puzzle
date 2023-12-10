@@ -12,7 +12,6 @@ Using a number of different resources, I was able to create a game that is both 
  ^ Text Version of the Game 
 
 
-
 ### Language and Tools 
 * Java
 * JavaFX
