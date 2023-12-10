@@ -11,12 +11,11 @@ Using a number of different resources, I was able to create a game that is both 
      ^ Text Version of the Game 
 
 
-
 ### Language and Tools 
 * Java
 * JavaFX
-* IntelliJ IDE
-* Git and GitHub
+* IntelliJ IDE 
+* GitHub
 
 ## How to Run 
 1. Clone the repository to your local machine
@@ -29,4 +28,3 @@ Using a number of different resources, I was able to create a game that is both 
 * [Te Reo Maori - Dictionary](https://www.maoridictionary.co.nz/)
 * [Te Reo Maori Language - Proverbs](https://www.maorilanguage.net/maori-proverbs)
 * [Geeks for Geeks](https://www.geeksforgeeks.org/memory-game-in-java/)
-* 

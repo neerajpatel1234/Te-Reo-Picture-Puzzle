@@ -1,37 +1,34 @@
 import java.util.*;
 
-/**
- * Game.java
- * This class is the main class for the game. It will start the game.
- * @version 1.0
- */
 public class Game {
-    // ---------------------------------------------- CONSTANTS ---------------------------------------------- //
-    static int score = 0;
-    static int incorrectAnswers = 0;
-    static boolean gameRunning = true;
+    private int score;
+    private int incorrectAnswers;
+    private boolean gameRunning;
 
-    static ArrayList<Phrase> phrasesList = new ArrayList<>();
-    static ArrayList<Word> wordsList = new ArrayList<>();
-    static HashMap<String, Colour> coloursList = new HashMap<>();
-    static HashSet<String> used = new HashSet<>();
+    private List<Phrase> phrasesList;
+    private List<Word> wordsList;
+    private Map<String, Colour> coloursList;
+    private Set<String> used;
 
-    // ---------------------------------------------- MAIN METHOD ---------------------------------------------- //
-    /**
-     * This method will start the game text version.
-     */
-    public static void main(String[] args) {
-        gameRunning = true;
-        setupPhrases();
-        setupWords();
-        setupColours();
-        startGame();
+    public Game() {
+        this.score = 0;
+        this.incorrectAnswers = 0;
+        this.gameRunning = true;
+        this.phrasesList = new ArrayList<>();
+        this.wordsList = new ArrayList<>();
+        this.coloursList = new HashMap<>();
+        this.used = new HashSet<>();
     }
 
-    /**
-     * This method will start the game.
-     */
-    public static void startGame() {
+    public static void main(String[] args) {
+        Game game = new Game();
+        game.setupPhrases();
+        game.setupWords();
+        game.setupColours();
+        game.startGame();
+    }
+
+    public void startGame() {
         System.out.println("--------- Welcome to the Te Reo Māori game! --------- \n");
         incorrectAnswers = 0;
         score = 0;
@@ -47,26 +44,24 @@ public class Game {
         System.out.println("          Final Score: " + score + ",  Incorrect Answers: " + incorrectAnswers);
     }
 
-    // ---------------------------------------------- RUN TURN METHOD ---------------------------------------------- //
-    /**
-     * This method will run a turn for the game.
-     */
-    public static void runTurn() {
+    public void runTurn() {
         int randomNum = (int) (Math.random() * 3);
         switch (randomNum) {
-            case 0 -> runColourTurn();
-            case 1 -> runWordTurn();
-            case 2 -> runPhraseTurn();
-            default -> throw new IllegalArgumentException("Invalid random number generated");
+            case 0:
+                runColourTurn();
+                break;
+            case 1:
+                runWordTurn();
+                break;
+            case 2:
+                runPhraseTurn();
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid random number generated");
         }
     }
 
-    // ---------------------------------------------- RUN COLOUR METHOD ---------------------------------------------- //
-    /**
-     * This method will run the colour turn for the game.
-     */
-    private static void runColourTurn() {
-        // ----- Print Te Reo Colour ----- //
+    private void runColourTurn() {
         Colour ansColour = null;
         while (ansColour == null) {
             int randNum = getRandNum(coloursList.size());
@@ -78,7 +73,6 @@ public class Game {
         used.add(ansColour.name());
         System.out.println("What is the English translation of: " + ansColour.name() + "? ");
 
-        // ----- Get & Check player input ----- //
         String playerInput = getPlayerInput();
 
         if (playerInput.equals(ansColour.englishName().toUpperCase())) {
@@ -89,17 +83,11 @@ public class Game {
             incorrectAnswers++;
         }
 
-        // ----- Print score ----- //
         System.out.println("    Score: " + score + ",  Incorrect Answers: " + incorrectAnswers);
         System.out.println("---------------------------------------------------- \n");
     }
 
-    // ---------------------------------------------- RUN WORD METHOD ---------------------------------------------- //
-    /**
-     * This method will run the word turn for the game.
-     */
-    private static void runWordTurn() {
-        // ----- Print Te Reo Word ----- //
+    private void runWordTurn() {
         Word ansWord = null;
         while (ansWord == null) {
             int randNum = getRandNum(wordsList.size());
@@ -111,7 +99,6 @@ public class Game {
         used.add(ansWord.name());
         System.out.println("What is the English translation of: " + ansWord.name() + "? ");
 
-        // ----- Get & Check player input ----- //
         String playerInput = getPlayerInput();
 
         if (playerInput.equals(ansWord.definition().toUpperCase())) {
@@ -122,17 +109,11 @@ public class Game {
             incorrectAnswers++;
         }
 
-        // ----- Print score ----- //
         System.out.println("    Score: " + score + ",  Incorrect Answers: " + incorrectAnswers);
         System.out.println("---------------------------------------------------- \n");
     }
 
-    // ---------------------------------------------- RUN PHRASE METHOD ---------------------------------------------- //
-    /**
-     * This method will run the phrase turn for the game.
-     */
-    private static void runPhraseTurn() {
-        // ----- Print Te Reo Phrase ----- //
+    private void runPhraseTurn() {
         Phrase ansPhrase = null;
         while (ansPhrase == null) {
             int randNum = getRandNum(phrasesList.size());
@@ -144,7 +125,6 @@ public class Game {
         used.add(ansPhrase.phrase());
         System.out.println("What is the English translation of: " + ansPhrase.phrase() + "? ");
 
-        // ----- Get & Check player input ----- //
         String playerInput = getPlayerInput();
 
         if (playerInput.equals(ansPhrase.englishPhrase().toUpperCase())) {
@@ -155,29 +135,18 @@ public class Game {
             incorrectAnswers++;
         }
 
-        // ----- Print score ----- //
         System.out.println("    Score: " + score + ",  Incorrect Answers: " + incorrectAnswers);
         System.out.println("---------------------------------------------------- \n");
     }
 
-
-
-    // ---------------------------------------------- HELPER METHODS ---------------------------------------------- //
-
-    /**
-     * This method will get a random number.
-     * @param size The size of the list.
-     * @return The random number.
-     */
     static int getRandNum(int size) {
-        return (int) (Math.random() * size);
+        int number =  (int) (Math.random() * size);
+        if (number == size) {
+            number--;
+        }
+      return number;
     }
 
-
-    /**
-     * This method will get the player input.
-     * @return The player input via the console.
-     */
     public static String getPlayerInput() {
         String input = "";
         while (input.isEmpty()) {
@@ -192,11 +161,7 @@ public class Game {
         return input.toUpperCase();
     }
 
-    // ---------------------------------------------- SETUP TE REO OBJECTS ---------------------------------------------- //
-    /**
-     * This method will set up the phrases for the game.
-     */
-    public static void setupPhrases() {
+    public void setupPhrases() {
         phrasesList = new ArrayList<>();
         phrasesList.add(new Phrase("Kia ora", "Hello"));
         phrasesList.add(new Phrase("Kei te pēhea koe?", "How are you?"));
@@ -210,12 +175,9 @@ public class Game {
         phrasesList.add(new Phrase("Ka kite anō", "See you later"));
     }
 
-    /**
-     * This method will set up the words for the game.
-     */
-    public static void setupWords(){
+    public void setupWords() {
         wordsList = new ArrayList<>();
-        wordsList.add(new Word("Tahi" , "One"));
+        wordsList.add(new Word("Tahi", "One"));
         wordsList.add(new Word("Rua" , "Two"));
         wordsList.add(new Word("Toru" , "Three"));
         wordsList.add(new Word("Whā" , "Four"));
@@ -230,10 +192,7 @@ public class Game {
         wordsList.add(new Word("Tahi rau" , "One hundred"));
     }
 
-    /**
-     * This method will set up the colours for the game.
-     */
-    public static void setupColours() {
+    public void setupColours() {
         coloursList = new HashMap<>();
         coloursList.put("Whero", new Colour("Whero", "Red"));
         coloursList.put("Karaka", new Colour("Karaka", "Orange"));
@@ -247,14 +206,21 @@ public class Game {
         coloursList.put("Kōwhai", new Colour("Kōwhai", "Yellow"));
     }
 
-    // ---------------------------------------------- SETTERS ---------------------------------------------- //
-
-
-    // ---------------------------------------------- GETTERS ---------------------------------------------- //
-
     public String toString() {
         return "Score: " + score + "\nIncorrect Answers: " + incorrectAnswers;
     }
 
-}
+   public List<Phrase> getPhrasesList() {
+        return phrasesList;
+    }
 
+    public List<Word> getWordsList() {
+        return wordsList;
+    }
+
+    public Map<String, Colour> getColoursList() {
+        return coloursList;
+    }
+
+
+}
