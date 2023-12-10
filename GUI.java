@@ -12,7 +12,6 @@ public class GUI {
     // ---------------------------------------------- MAIN METHOD ---------------------------------------------- //
     /**
      * This method will start the game.
-     * @param args
      */
     public static void main(String[] args) {
         Game currentGame = new Game();
