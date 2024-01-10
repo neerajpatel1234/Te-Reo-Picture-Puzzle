@@ -9,6 +9,7 @@ public class GUI {
     private JTextField inputTextField;
     private JPanel startMenuPanel;
     private JPanel gamePanel;
+    private JLabel centerLabel;
 
     public GUI(Game game) {
         this.game = game;
@@ -24,9 +25,19 @@ public class GUI {
         startMenuPanel = createStartMenuPanel();
         frame.setContentPane(startMenuPanel);
 
+        // Create central JLabel for displaying text in the center
+        centerLabel = new JLabel();
+        centerLabel.setHorizontalAlignment(JLabel.CENTER); // Center-align the text
+
+
         // Center the frame on the screen
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    // Method to display text in the center of the GUI
+    private void displayTextInCenter(String text) {
+        centerLabel.setText(text);
     }
 
     private JPanel createStartMenuPanel() {
@@ -62,6 +73,20 @@ public class GUI {
         frame.setLocationRelativeTo(null);
     }
 
+    private void handleAnswerSubmission() {
+        String playerInput = inputTextField.getText();
+        // Process the player input as needed
+
+        // Update the game output after processing the answer
+        updateGameOutput();
+    }
+
+    private void updateGameOutput() {
+        // Update the JTextArea with the current game state (score, incorrect answers, etc.)
+        outputTextArea.setText(game.toString());
+        // Add more logic to display the current question or other relevant information.
+    }
+
     private JPanel createGamePanel() {
         JPanel panel = new JPanel(new BorderLayout());
 
@@ -92,22 +117,6 @@ public class GUI {
         return panel;
     }
 
-    private void handleAnswerSubmission() {
-        String playerInput = inputTextField.getText();
-        // Add logic to handle the player's input based on the current turn type
-        // (color, word, or phrase). Use game.runTurn() or similar method.
-
-        // Example:
-        // game.runTurn();
-
-        updateGameOutput();
-    }
-
-    private void updateGameOutput() {
-        // Update the JTextArea with the current game state (score, incorrect answers, etc.)
-        outputTextArea.setText(game.toString());
-        // Add more logic to display the current question or other relevant information.
-    }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
@@ -118,4 +127,6 @@ public class GUI {
             }
         });
     }
+
+
 }

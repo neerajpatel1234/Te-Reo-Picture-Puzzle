@@ -71,6 +71,7 @@ public class Game {
             }
         }
         used.add(ansColour.name());
+
         System.out.println("What is the English translation of: " + ansColour.name() + "? ");
 
         String playerInput = getPlayerInput();
