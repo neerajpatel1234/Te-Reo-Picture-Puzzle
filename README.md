@@ -12,7 +12,7 @@ Using a number of different resources, I was able to create a game that is both 
 
 
 ### Language and Tools 
-* Java
+* Java (Zulu 20)
 * JavaFX
 * IntelliJ IDE 
 * GitHub
