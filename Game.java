@@ -190,7 +190,7 @@ public class Game {
             if (System.console() != null) {
                 input = System.console().readLine();
             } else {
-                System.out.println("No console available. Please provide input:");
+                System.out.println("Please provide input:");
                 Scanner scanner = new Scanner(System.in);
                 input = scanner.nextLine();
             }
