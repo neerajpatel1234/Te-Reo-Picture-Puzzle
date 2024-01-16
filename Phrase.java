@@ -1,5 +1,5 @@
 /**
- * A Phrase objeect with the Moari phrase and the English translation
+ * A Phrase object with the Moari phrase and the English translation
  * @param phrase
  * @param englishPhrase
  */

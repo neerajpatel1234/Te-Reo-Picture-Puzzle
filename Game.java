@@ -1,5 +1,8 @@
 import java.util.*;
 
+/**
+ * This class is responsible for the game logic
+ */
 public class Game {
     private int score;
     private int incorrectAnswers;
@@ -10,6 +13,9 @@ public class Game {
     private Map<String, Colour> coloursList;
     private Set<String> used;
 
+    /**
+     * Constructor for the Game class
+     */
     public Game() {
         this.score = 0;
         this.incorrectAnswers = 0;
@@ -20,11 +26,19 @@ public class Game {
         this.used = new HashSet<>();
     }
 
+    /**
+     * Main method to run the game
+     * @param args - command line arguments
+     */
     public static void main(String[] args) {
         Game game = new Game();
         game.startGame(game);
     }
 
+    /**
+     * Method to start the game
+     * @param game - the game object
+     */
     public void startGame(Game game) {
         game.setupPhrases();
         game.setupWords();
@@ -45,6 +59,9 @@ public class Game {
         System.out.println("          Final Score: " + score + ",  Incorrect Answers: " + incorrectAnswers);
     }
 
+    /**
+     * Method to run a turn of the game
+     */
     public void runTurn() {
         int randomNum = (int) (Math.random() * 3);
         switch (randomNum) {
@@ -62,6 +79,9 @@ public class Game {
         }
     }
 
+    /**
+     * Method to run a turn of the game
+     */
     private void runColourTurn() {
         Colour ansColour = null;
         while (ansColour == null) {
@@ -89,6 +109,9 @@ public class Game {
         System.out.println("---------------------------------------------------- \n");
     }
 
+    /**
+     * Method to run thw word turn of the game
+     */
     private void runWordTurn() {
         Word ansWord = null;
         while (ansWord == null) {
@@ -115,6 +138,9 @@ public class Game {
         System.out.println("---------------------------------------------------- \n");
     }
 
+    /**
+     * Method to run the phrase turn of the game
+     */
     private void runPhraseTurn() {
         Phrase ansPhrase = null;
         while (ansPhrase == null) {
@@ -141,6 +167,11 @@ public class Game {
         System.out.println("---------------------------------------------------- \n");
     }
 
+    /**
+     * Method to get a random number
+     * @param size - the size of the list
+     * @return - the random number
+     */
     static int getRandNum(int size) {
         int number =  (int) (Math.random() * size);
         if (number == size) {
@@ -149,6 +180,10 @@ public class Game {
       return number;
     }
 
+    /**
+     * Method to get the player input
+     * @return - the player input
+     */
     public static String getPlayerInput() {
         String input = "";
         while (input.isEmpty()) {
@@ -163,6 +198,9 @@ public class Game {
         return input.toUpperCase();
     }
 
+    /**
+     * Method to set up the phrases
+     */
     public void setupPhrases() {
         phrasesList = new ArrayList<>();
         phrasesList.add(new Phrase("Kia ora", "Hello"));
@@ -177,6 +215,9 @@ public class Game {
         phrasesList.add(new Phrase("Ka kite anō", "See you later"));
     }
 
+    /**
+     * Method to set up the words
+     */
     public void setupWords() {
         wordsList = new ArrayList<>();
         wordsList.add(new Word("Tahi", "One"));
@@ -194,6 +235,9 @@ public class Game {
         wordsList.add(new Word("Tahi rau" , "One hundred"));
     }
 
+    /**
+     * Method to set up the colours
+     */
     public void setupColours() {
         coloursList = new HashMap<>();
         coloursList.put("Whero", new Colour("Whero", "Red"));
@@ -208,20 +252,12 @@ public class Game {
         coloursList.put("Kōwhai", new Colour("Kōwhai", "Yellow"));
     }
 
+    /**
+     * Method to get the score
+     * @return - the score
+     */
     public String toString() {
         return "Score: " + score + "\nIncorrect Answers: " + incorrectAnswers;
-    }
-
-   public List<Phrase> getPhrasesList() {
-        return phrasesList;
-    }
-
-    public List<Word> getWordsList() {
-        return wordsList;
-    }
-
-    public Map<String, Colour> getColoursList() {
-        return coloursList;
     }
 
 

@@ -1,17 +1,17 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
+/*
+  * This class is responsible for the GUI of the game
+ */
 public class GUI {
     private final Game game;
     private JTextArea outputTextArea;
     private JTextField inputTextField;
     private JPanel startMenuPanel;
     private JPanel gamePanel;
-    private JLabel centerLabel;
 
-    /**
+  /**
      * Create a new GUI for the given game
      * @param game - the game to create a GUI
      */
@@ -33,7 +33,7 @@ public class GUI {
         frame.setContentPane(startMenuPanel);
 
         // Create central JLabel for displaying text in the center
-        centerLabel = new JLabel();
+      JLabel centerLabel = new JLabel();
         centerLabel.setHorizontalAlignment(JLabel.CENTER); // Center-align the text
 
 
@@ -52,25 +52,14 @@ public class GUI {
 
         // Add GUI button to the left --------------------
         JButton guiButton = new JButton("Start GUI Game");
-        guiButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                switchToGamePanel();
-            }
-        });
+        guiButton.addActionListener(e -> switchToGamePanel());
         guiButton.setPreferredSize(new Dimension(200, 50));
         guiButton.setFont(new Font("Times New Roman", Font.PLAIN, 15));
         guiButton.setForeground(Color.decode("#315FF5"));
 
         // Add text button to the right ------------------
         JButton textButton = new JButton("Start CMD Game");
-        textButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                game.startGame(game);
-            }
-        });
-
+        textButton.addActionListener(e -> game.startGame(game));
         textButton.setPreferredSize(new Dimension(200, 50));
         textButton.setFont(new Font("Times New Roman", Font.PLAIN, 15));
         textButton.setForeground(Color.decode("#4231F5"));
@@ -108,6 +97,7 @@ public class GUI {
         String playerInput = inputTextField.getText();
         // Process the player input as needed
 
+        //TODO
 
         // Update the game output after processing the answer
         updateGameOutput();
@@ -120,7 +110,7 @@ public class GUI {
         outputTextArea.setText(game.toString());
 
         // Add more logic to display the current question or other relevant information.
-
+        // TODO
     }
 
     private JPanel createGamePanel() {
@@ -138,12 +128,7 @@ public class GUI {
         inputPanel.add(inputTextField);
 
         JButton answerButton = new JButton("Submit Answer");
-        answerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                handleAnswerSubmission();
-            }
-        });
+        answerButton.addActionListener(e -> handleAnswerSubmission());
         inputPanel.add(answerButton);
 
         // Add the inputPanel to the bottom of the mainPanel
@@ -154,12 +139,9 @@ public class GUI {
 
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                Game currentGame = new Game();
-                GUI gui = new GUI(currentGame);
-            }
+        SwingUtilities.invokeLater(() -> {
+            Game currentGame = new Game();
+            GUI gui = new GUI(currentGame);
         });
     }
 
