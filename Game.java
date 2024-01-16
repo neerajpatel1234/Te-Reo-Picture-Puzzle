@@ -22,13 +22,14 @@ public class Game {
 
     public static void main(String[] args) {
         Game game = new Game();
+        game.startGame(game);
+    }
+
+    public void startGame(Game game) {
         game.setupPhrases();
         game.setupWords();
         game.setupColours();
-        game.startGame();
-    }
 
-    public void startGame() {
         System.out.println("--------- Welcome to the Te Reo Māori game! --------- \n");
         incorrectAnswers = 0;
         score = 0;
