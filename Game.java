@@ -1,21 +1,14 @@
 import java.util.*;
 
-/**
- * This class is responsible for the game logic
- */
 public class Game {
     private int score;
     private int incorrectAnswers;
     private boolean gameRunning;
-
     private List<Phrase> phrasesList;
     private List<Word> wordsList;
     private Map<String, Colour> coloursList;
     private Set<String> used;
 
-    /**
-     * Constructor for the Game class
-     */
     public Game() {
         this.score = 0;
         this.incorrectAnswers = 0;
@@ -26,30 +19,22 @@ public class Game {
         this.used = new HashSet<>();
     }
 
-    /**
-     * Main method to run the game
-     * @param args - command line arguments
-     */
     public static void main(String[] args) {
-        Game game = new Game();
-        game.startGame(game);
+        CLI.main(args);
     }
 
-    /**
-     * Method to start the game
-     * @param game - the game object
-     */
-    public void startGame(Game game) {
-        game.setupPhrases();
-        game.setupWords();
-        game.setupColours();
+    public void startGame() {
+        setupPhrases();
+        setupWords();
+        setupColours();
 
         System.out.println("--------- Welcome to the Te Reo Māori game! --------- \n");
         incorrectAnswers = 0;
         score = 0;
 
+        Scanner scanner = new Scanner(System.in);
         while (gameRunning) {
-            runTurn();
+            runTurn(scanner);
             if (incorrectAnswers >= 3) {
                 gameRunning = false;
             }
@@ -59,30 +44,24 @@ public class Game {
         System.out.println("          Final Score: " + score + ",  Incorrect Answers: " + incorrectAnswers);
     }
 
-    /**
-     * Method to run a turn of the game
-     */
-    public void runTurn() {
+    public void runTurn(Scanner scanner) {
         int randomNum = (int) (Math.random() * 3);
         switch (randomNum) {
             case 0:
-                runColourTurn();
+                runColourTurn(scanner);
                 break;
             case 1:
-                runWordTurn();
+                runWordTurn(scanner);
                 break;
             case 2:
-                runPhraseTurn();
+                runPhraseTurn(scanner);
                 break;
             default:
                 throw new IllegalArgumentException("Invalid random number generated");
         }
     }
 
-    /**
-     * Method to run a turn of the game
-     */
-    private void runColourTurn() {
+    private void runColourTurn(Scanner scanner) {
         Colour ansColour = null;
         while (ansColour == null) {
             int randNum = getRandNum(coloursList.size());
@@ -95,7 +74,7 @@ public class Game {
 
         System.out.println("What is the English translation of: " + ansColour.name() + "? ");
 
-        String playerInput = getPlayerInput();
+        String playerInput = getPlayerInput(scanner);
 
         if (playerInput.equals(ansColour.englishName().toUpperCase())) {
             System.out.println("Correct!");
@@ -109,10 +88,7 @@ public class Game {
         System.out.println("---------------------------------------------------- \n");
     }
 
-    /**
-     * Method to run thw word turn of the game
-     */
-    private void runWordTurn() {
+    private void runWordTurn(Scanner scanner) {
         Word ansWord = null;
         while (ansWord == null) {
             int randNum = getRandNum(wordsList.size());
@@ -124,7 +100,7 @@ public class Game {
         used.add(ansWord.name());
         System.out.println("What is the English translation of: " + ansWord.name() + "? ");
 
-        String playerInput = getPlayerInput();
+        String playerInput = getPlayerInput(scanner);
 
         if (playerInput.equals(ansWord.definition().toUpperCase())) {
             System.out.println("Correct!");
@@ -138,10 +114,7 @@ public class Game {
         System.out.println("---------------------------------------------------- \n");
     }
 
-    /**
-     * Method to run the phrase turn of the game
-     */
-    private void runPhraseTurn() {
+    private void runPhraseTurn(Scanner scanner) {
         Phrase ansPhrase = null;
         while (ansPhrase == null) {
             int randNum = getRandNum(phrasesList.size());
@@ -153,7 +126,7 @@ public class Game {
         used.add(ansPhrase.phrase());
         System.out.println("What is the English translation of: " + ansPhrase.phrase() + "? ");
 
-        String playerInput = getPlayerInput();
+        String playerInput = getPlayerInput(scanner);
 
         if (playerInput.equals(ansPhrase.englishPhrase().toUpperCase())) {
             System.out.println("Correct!");
@@ -167,100 +140,45 @@ public class Game {
         System.out.println("---------------------------------------------------- \n");
     }
 
-    /**
-     * Method to get a random number
-     * @param size - the size of the list
-     * @return - the random number
-     */
     static int getRandNum(int size) {
         int number =  (int) (Math.random() * size);
         if (number == size) {
             number--;
         }
-      return number;
+        return number;
     }
 
-    /**
-     * Method to get the player input
-     * @return - the player input
-     */
-    public static String getPlayerInput() {
+    public static String getPlayerInput(Scanner scanner) {
         String input = "";
         while (input.isEmpty()) {
-            if (System.console() != null) {
-                input = System.console().readLine();
-            } else {
-                System.out.println("Please provide input:");
-                Scanner scanner = new Scanner(System.in);
-                input = scanner.nextLine();
-            }
+            input = scanner.nextLine().trim().toUpperCase();
         }
-        return input.toUpperCase();
+        return input;
     }
 
-    /**
-     * Method to set up the phrases
-     */
     public void setupPhrases() {
         phrasesList = new ArrayList<>();
         phrasesList.add(new Phrase("Kia ora", "Hello"));
         phrasesList.add(new Phrase("Kei te pēhea koe?", "How are you?"));
-        phrasesList.add(new Phrase("Kei te pai ahau", "I am good"));
-        phrasesList.add(new Phrase("Nō hea koe?", "Where are you from?"));
-        phrasesList.add(new Phrase("Nō Ingarangi ahau", "I am from England"));
-        phrasesList.add(new Phrase("Ko wai tō ingoa?", "What is your name?"));
-        phrasesList.add(new Phrase("Ko Jack tōku ingoa", "My name is Jack"));
-        phrasesList.add(new Phrase("Ka kite anō", "See you later"));
-        phrasesList.add(new Phrase("Ka kite", "Goodbye"));
-        phrasesList.add(new Phrase("Ka kite anō", "See you later"));
+        // TODO Add more phrases...
     }
 
-    /**
-     * Method to set up the words
-     */
     public void setupWords() {
         wordsList = new ArrayList<>();
         wordsList.add(new Word("Tahi", "One"));
         wordsList.add(new Word("Rua" , "Two"));
-        wordsList.add(new Word("Toru" , "Three"));
-        wordsList.add(new Word("Whā" , "Four"));
-        wordsList.add(new Word("Rima" , "Five"));
-        wordsList.add(new Word("Ono" , "Six"));
-        wordsList.add(new Word("Whitu" , "Seven"));
-        wordsList.add(new Word("Waru" , "Eight"));
-        wordsList.add(new Word("Iwa" , "Nine"));
-        wordsList.add(new Word("Tekau" , "Ten"));
-        wordsList.add(new Word("Kotahi tekau" , "Eleven"));
-        wordsList.add(new Word("Rua tekau" , "Twenty"));
-        wordsList.add(new Word("Tahi rau" , "One hundred"));
+        // TODO Add more words...
     }
 
-    /**
-     * Method to set up the colours
-     */
     public void setupColours() {
         coloursList = new HashMap<>();
         coloursList.put("Whero", new Colour("Whero", "Red"));
         coloursList.put("Karaka", new Colour("Karaka", "Orange"));
-        coloursList.put("Kākāriki", new Colour("Kākāriki", "Green"));
-        coloursList.put("Kikorangi", new Colour("Kikorangi", "Blue"));
-        coloursList.put("Tūāuri", new Colour("Tūāuri", "Brown"));
-        coloursList.put("Mā", new Colour("Mā", "White"));
-        coloursList.put("Mangu", new Colour("Mangu", "Black"));
-        coloursList.put("Pango", new Colour("Pango", "Black"));
-        coloursList.put("Parauri", new Colour("Parauri", "Grey"));
-        coloursList.put("Kōwhai", new Colour("Kōwhai", "Yellow"));
+        // TODO Add more colors...
     }
 
-    /**
-     * Method to get the score
-     * @return - the score
-     */
+    @Override
     public String toString() {
         return "Score: " + score + "\nIncorrect Answers: " + incorrectAnswers;
     }
-
-
-
-
 }
