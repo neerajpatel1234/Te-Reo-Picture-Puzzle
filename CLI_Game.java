@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Game {
+public class CLI_Game {
     private int score;
     private int incorrectAnswers;
     private boolean gameRunning;
@@ -9,7 +9,7 @@ public class Game {
     private Map<String, Colour> coloursList;
     private Set<String> used;
 
-    public Game() {
+    public CLI_Game() {
         this.score = 0;
         this.incorrectAnswers = 0;
         this.gameRunning = true;
@@ -160,21 +160,42 @@ public class Game {
         phrasesList = new ArrayList<>();
         phrasesList.add(new Phrase("Kia ora", "Hello"));
         phrasesList.add(new Phrase("Kei te pēhea koe?", "How are you?"));
-        // TODO Add more phrases...
+        phrasesList.add(new Phrase("Ko wai tō ingoa?", "What is your name?"));
+        phrasesList.add(new Phrase("Kei te pai", "Good"));
+        phrasesList.add(new Phrase("Kei te kino", "Bad"));
+        phrasesList.add(new Phrase("Kei te mahi", "Work"));
+        phrasesList.add(new Phrase("Kei te kai", "Eat"));
+        phrasesList.add(new Phrase("Kei te moe", "Sleep"));
+        phrasesList.add(new Phrase("Kei te haere", "Go"));
+        phrasesList.add(new Phrase("Kei te noho", "Sit"));
+        phrasesList.add(new Phrase("Kei te tū", "Stand"));
     }
 
     public void setupWords() {
         wordsList = new ArrayList<>();
         wordsList.add(new Word("Tahi", "One"));
         wordsList.add(new Word("Rua" , "Two"));
-        // TODO Add more words...
+        wordsList.add(new Word("Toru", "Three"));
+        wordsList.add(new Word("Wha", "Four"));
+        wordsList.add(new Word("Rima", "Five"));
+        wordsList.add(new Word("Ono", "Six"));
+        wordsList.add(new Word("Whitu", "Seven"));
+        wordsList.add(new Word("Waru", "Eight"));
+        wordsList.add(new Word("Iwa", "Nine"));
+        wordsList.add(new Word("Tekau", "Ten"));
     }
 
     public void setupColours() {
         coloursList = new HashMap<>();
         coloursList.put("Whero", new Colour("Whero", "Red"));
         coloursList.put("Karaka", new Colour("Karaka", "Orange"));
-        // TODO Add more colors...
+        coloursList.put("Kākāriki", new Colour("Kākāriki", "Green"));
+        coloursList.put("Kikorangi", new Colour("Kikorangi", "Blue"));
+        coloursList.put("Mā", new Colour("Mā", "White"));
+        coloursList.put("Mangu", new Colour("Mangu", "Black"));
+        coloursList.put("Kowhai", new Colour("Kowhai", "Yellow"));
+        coloursList.put("Parauri", new Colour("Parauri", "Brown"));
+        coloursList.put("Mawhero", new Colour("Mawhero", "Pink"));
     }
 
     @Override

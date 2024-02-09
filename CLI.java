@@ -1,6 +1,6 @@
 public class CLI {
   public static void main(String[] args) {
-    Game game = new Game();
+    CLI_Game game = new CLI_Game();
     game.startGame();
   }
 }
