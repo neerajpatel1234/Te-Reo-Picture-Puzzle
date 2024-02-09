@@ -8,15 +8,8 @@ Using several different resources, I was able to create a game that is both fun 
 ## Screenshots of the Application 
 
 - <img width="750" alt="image" src="https://github.com/neerajpatel1234/Te-Reo-Picture-Puzzle/assets/114114241/27a0e125-5e94-4c8c-b5e3-105078bc73a0">
-    ^ Start-up message 
-
-
-    
-
 - <img width="750" alt="image" src="https://github.com/neerajpatel1234/Te-Reo-Picture-Puzzle/assets/114114241/e9cd76bc-7ea8-4539-9603-8f398527847f">
-    ^ Text Version of the Game 
 
-    
 
 ### Language and Tools 
 * Java (Zulu 20)
