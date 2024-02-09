@@ -12,12 +12,16 @@ public class GUI {
     JFrame frame = new JFrame("Te Reo Picture Game by Neeraj Patel");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    JLabel label = new JLabel("Welcome to the Te Reo Māori game!");
-    label.setHorizontalAlignment(SwingConstants.CENTER);
-    frame.getContentPane().add(label);
+    JButton button = new JButton("Start Game");
+    button.addActionListener(e ->  game.startGame());
 
+    button.setHorizontalAlignment(SwingConstants.CENTER);
+
+    frame.add(button);
     frame.setSize(400, 300);
     frame.setLocationRelativeTo(null);
     frame.setVisible(true);
   }
+
+
 }
