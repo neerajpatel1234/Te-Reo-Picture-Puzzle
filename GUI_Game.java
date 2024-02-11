@@ -30,6 +30,9 @@ public class GUI_Game {
     }
 
     // ------------------------------- Set up Methods -------------------------------
+    /**
+     * Set up the game by initialising the lists and variables and starting the game
+     */
     private void setupGame() {
         // ---- Initialise the lists and variables ----
         wordsList = new ArrayList<>();
@@ -54,6 +57,9 @@ public class GUI_Game {
     }
 
     // ------------------------------- Game Methods -------------------------------
+    /**
+     * Run a turn of the game
+     */
     private void runTurn() {
         // ---- Validate the game ----
         if (gameType == null) {
