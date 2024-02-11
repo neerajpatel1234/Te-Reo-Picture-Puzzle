@@ -1,12 +1,10 @@
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 
 /**
  * GUI_Game.java
- *
  * This class is the main class for the GUI of the game. It will be responsible for
  * creating the GUI and handling the user input.
  */
@@ -16,9 +14,13 @@ public class GUI_Game {
     private List<Phrase> phrasesList;
     private List<Colour> coloursList;
     enum gameType {WORDS, PHRASES, COLOURS }
+    gameType gameType;
 
     private int score;
     private int incorrectAnswers;
+
+    JFrame frame = new JFrame("Te Reo Picture Game");
+    JPanel panel = new JPanel();
 
 
     // ------------------------------- Constructor -------------------------------
@@ -30,45 +32,53 @@ public class GUI_Game {
     }
 
     private void setupGame() {
+        // ---- Initialise the lists and variables ----
         wordsList = new ArrayList<>();
         phrasesList = new ArrayList<>();
         coloursList = new ArrayList<>();
         score = 0;
         incorrectAnswers = 0;
+
+        // ---- Setup the words, phrases and colours ----
         setupWords();
         setupPhrases();
         setupColours();
+
+        // ---- Start the game ----
         startGame();
     }
 
     public void startGame() {
         // ---- Ask the user to select a game type ----
-        gameType gameType = getGameType();
+        gameType = getGameType();
+        drawGrid();
+        //runTurn(gameType);
+    }
 
-        // ---- Create the GUI ----
-        JFrame frame = new JFrame("Te Reo Picture Game");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+    private void runTurn(gameType gameType) {
+        while (incorrectAnswers < 3) {
+            if (gameType == gameType.WORDS) {
+                runWordTurn();
+            } else if (gameType == gameType.PHRASES) {
+                runPhraseTurn();
+            } else if (gameType == gameType.COLOURS) {
+                runColourTurn();
+            }
+        }
 
-        // ---- Create the buttons ----
-        JButton button1 = new JButton("Start Game");
-        JButton button2 = new JButton("Exit Game");
-        button1.setAlignmentX(JButton.CENTER_ALIGNMENT);
-        button2.setAlignmentX(JButton.CENTER_ALIGNMENT);
+        // ---- Game over ----
+        JOptionPane.showMessageDialog(null, "Game Over! Your final score is: " + score);
+        JOptionPane.showMessageDialog(null, "Thank you for playing the Te Reo Picture Game!");
+        System.exit(0);
+    }
 
-        // ---- Add action listeners to the buttons ----
-        button1.addActionListener(e -> startGame());
-        button2.addActionListener(e -> System.exit(0));
+    private void runColourTurn() {
+    }
 
-        frame.add(button1);
-        frame.add(button2);
+    private void runPhraseTurn() {
+    }
 
-        // ---- Set the frame size and location ------
-        frame.setSize(250, 90);
-        frame.setLocationRelativeTo(null);
-
-
-
+    private void runWordTurn() {
     }
 
     private gameType getGameType() {
@@ -123,7 +133,33 @@ public class GUI_Game {
     }
 
     private void drawGrid() {
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+        frame.setSize(500, 500);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
 
+        int numberOfCards = gameType == gameType.WORDS ? wordsList.size() : gameType == gameType.PHRASES ? phrasesList.size() : coloursList.size();
+        for (int i = 0; i < numberOfCards; i++) {
+            JButton button = new JButton("Card " + i);
+            button.setAlignmentX(JButton.CENTER_ALIGNMENT);
+            panel.add(button);
+        }
+        frame.add(panel);
+
+
+
+    }
+    
+    private void redrawGrid() {
+        panel.removeAll();
+        int numberOfCards = gameType == gameType.WORDS ? wordsList.size() : gameType == gameType.PHRASES ? phrasesList.size() : coloursList.size();
+        for (int i = 0; i < numberOfCards; i++) {
+            JButton button = new JButton("Card " + i);
+            button.setAlignmentX(JButton.CENTER_ALIGNMENT);
+            panel.add(button);
+        }
+        frame.add(panel);
     }
 
 
