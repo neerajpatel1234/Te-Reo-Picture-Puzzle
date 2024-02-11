@@ -10,7 +10,7 @@ public class CLI_Game {
     private Set<String> used;
 
     public CLI_Game() {
-        this.score = 0;
+      this.score = 0;
         this.incorrectAnswers = 0;
         this.gameRunning = true;
         this.phrasesList = new ArrayList<>();
@@ -45,7 +45,7 @@ public class CLI_Game {
     }
 
     public void runTurn(Scanner scanner) {
-        int randomNum = (int) (Math.random() * 3);
+      int randomNum = (int) (Math.random() * 3);
         switch (randomNum) {
             case 0:
                 runColourTurn(scanner);
