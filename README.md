@@ -10,7 +10,9 @@ In the end, the outcome is a game that cleverly blends learning and enjoyment, g
 ## Screenshots of the Application 
 - <img width="600" alt="image" src="https://github.com/neerajpatel1234/Te-Reo-Picture-Puzzle/assets/114114241/27a0e125-5e94-4c8c-b5e3-105078bc73a0">
 - <img width="300" alt="image" src="https://github.com/neerajpatel1234/Te-Reo-Picture-Puzzle/assets/114114241/02653305-9685-491f-b3bc-38694a881fb6"> <img width="300" alt="image" src="https://github.com/neerajpatel1234/Te-Reo-Picture-Puzzle/assets/114114241/45619bd1-8448-4683-a5d8-2ebc8b179223">
-- <img width="300" alt="image" src="https://github.com/neerajpatel1234/Te-Reo-Picture-Puzzle/assets/114114241/1c44345c-702c-43a6-a1f7-c3d9bda56193"> <img width="300" alt="image" src="https://github.com/neerajpatel1234/Te-Reo-Picture-Puzzle/assets/114114241/43b542af-a8fe-453b-9448-ecb4310250a9">
+- <img width="300" alt="image" src="https://github.com/neerajpatel1234/Te-Reo-Picture-Puzzle/assets/114114241/601dd228-e157-4878-8aea-878d72442ee3"> <img width="300" alt="image" src="https://github.com/neerajpatel1234/Te-Reo-Picture-Puzzle/assets/114114241/c8be0b97-eb6e-48de-b885-31112919f27a">
+
+
 
 
 
