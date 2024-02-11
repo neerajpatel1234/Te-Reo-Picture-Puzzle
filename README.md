@@ -8,9 +8,9 @@ The result of my research into Te Reo Māori language and culture is this pictur
 In the end, the outcome is a game that cleverly blends learning and enjoyment, giving users a vibrant platform to connect and have fun with Te Reo Māori. In addition to honing my technical abilities, this endeavour helped me understand more deeply about rich cultural history of New Zealand
 
 ## Screenshots of the Application 
-- <img width="750" alt="image" src="https://github.com/neerajpatel1234/Te-Reo-Picture-Puzzle/assets/114114241/27a0e125-5e94-4c8c-b5e3-105078bc73a0">
+- <img width="800" alt="image" src="https://github.com/neerajpatel1234/Te-Reo-Picture-Puzzle/assets/114114241/27a0e125-5e94-4c8c-b5e3-105078bc73a0">
 - <img width="400" alt="image" src="https://github.com/neerajpatel1234/Te-Reo-Picture-Puzzle/assets/114114241/02653305-9685-491f-b3bc-38694a881fb6"> <img width="400" alt="image" src="https://github.com/neerajpatel1234/Te-Reo-Picture-Puzzle/assets/114114241/45619bd1-8448-4683-a5d8-2ebc8b179223">
-- <img width="500" alt="image" src="https://github.com/neerajpatel1234/Te-Reo-Picture-Puzzle/assets/114114241/4a67634e-4da4-4241-911d-f94b845a21dd"> 
+- <img width="400" alt="image" src="https://github.com/neerajpatel1234/Te-Reo-Picture-Puzzle/assets/114114241/4a67634e-4da4-4241-911d-f94b845a21dd"> 
 
 
 
@@ -22,7 +22,7 @@ In the end, the outcome is a game that cleverly blends learning and enjoyment, g
 ## How to Run 
 1. Clone the repository to your local machine
 2. Open the project in IntelliJ or your preferred IDE
-3. Run the __________.java file
+3. Run the Start_GUI.java file
 4. Enjoy the game!
 
 ## Sources and References 
