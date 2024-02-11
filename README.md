@@ -21,7 +21,7 @@ In the end, the outcome is a game that cleverly blends learning and enjoyment, g
 ## How to Run 
 1. Clone the repository to your local machine
 2. Open the project in IntelliJ or your preferred IDE
-3. Run the GUI.java file
+3. Run the __________.java file
 4. Enjoy the game!
 
 ## Sources and References 
