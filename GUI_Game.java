@@ -15,10 +15,8 @@ public class GUI_Game {
     private List<Colour> coloursList;
     enum gameType {WORDS, PHRASES, COLOURS }
     gameType gameType;
-
     private int score;
     private int incorrectAnswers;
-
     JFrame frame = new JFrame("Te Reo Picture Game");
     JPanel panel = new JPanel();
 
@@ -31,6 +29,7 @@ public class GUI_Game {
         setupGame();
     }
 
+    // ------------------------------- Set up Methods -------------------------------
     private void setupGame() {
         // ---- Initialise the lists and variables ----
         wordsList = new ArrayList<>();
@@ -52,33 +51,87 @@ public class GUI_Game {
         // ---- Ask the user to select a game type ----
         gameType = getGameType();
         drawGrid();
-        //runTurn(gameType);
     }
 
-    private void runTurn(gameType gameType) {
-        while (incorrectAnswers < 3) {
-            if (gameType == gameType.WORDS) {
-                runWordTurn();
-            } else if (gameType == gameType.PHRASES) {
-                runPhraseTurn();
-            } else if (gameType == gameType.COLOURS) {
-                runColourTurn();
-            }
+    // ------------------------------- Game Methods -------------------------------
+    private void runTurn() {
+        // ---- Validate the game ----
+        if (gameType == null) {
+            throw new IllegalArgumentException("Game type must not be null");
+        }
+        if (incorrectAnswers >= 3) {
+            JOptionPane.showMessageDialog(null, "Game Over! Your final score is: " + score);
+            JOptionPane.showMessageDialog(null, "Thank you for playing the Te Reo Picture Game!");
+            System.exit(0);
         }
 
-        // ---- Game over ----
-        JOptionPane.showMessageDialog(null, "Game Over! Your final score is: " + score);
-        JOptionPane.showMessageDialog(null, "Thank you for playing the Te Reo Picture Game!");
-        System.exit(0);
+        // ---- Run the turn based on the game type ----
+        if (gameType == gameType.WORDS) {
+            runWordTurn();
+        } else if (gameType == gameType.PHRASES) {
+            runPhraseTurn();
+        } else if (gameType == gameType.COLOURS) {
+            runColourTurn();
+        }
     }
 
     private void runColourTurn() {
+        // ---- Get a random colour ----
+        int randomNum = (int) (Math.random() * coloursList.size());
+        Colour colour = coloursList.get(randomNum);
+
+        // ---- Create the dialog box ----
+        String[] options = {"Red", "Green", "Blue", "Black", "White", "Orange"};
+        int choice = JOptionPane.showOptionDialog(null, "Please select the colour of the word: " + colour.name(), "Colour",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
+        // ---- Check the answer ----
+        if (options[choice].equals(colour.englishName())) {
+            JOptionPane.showMessageDialog(null, "Correct! The colour of the word " + colour.name() + " is " + colour.englishName());
+            score++;
+        } else {
+            JOptionPane.showMessageDialog(null, "Incorrect! The colour of the word " + colour.name() + " is " + colour.englishName());
+            incorrectAnswers++;
+        }
+        redrawGrid();
     }
 
     private void runPhraseTurn() {
+        // ---- Get a random phrase ----
+        int randomNum = (int) (Math.random() * phrasesList.size());
+        Phrase phrase = phrasesList.get(randomNum);
+
+        // ---- Create the dialog box ----
+        String playerInput = JOptionPane.showInputDialog("What is the English translation of: " + phrase.phrase() + "?");
+
+        // ---- Check the answer ----
+        if (playerInput.equals(phrase.englishPhrase())) {
+            JOptionPane.showMessageDialog(null, "Correct! The English translation of " + phrase.phrase() + " is " + phrase.englishPhrase());
+            score++;
+        } else {
+            JOptionPane.showMessageDialog(null, "Incorrect! The English translation of " + phrase.phrase() + " is " + phrase.englishPhrase());
+            incorrectAnswers++;
+        }
+        redrawGrid();
     }
 
     private void runWordTurn() {
+        // ---- Get a random word ----
+        int randomNum = (int) (Math.random() * wordsList.size());
+        Word word = wordsList.get(randomNum);
+
+        // ---- Create the dialog box ----
+        String playerInput = JOptionPane.showInputDialog("What is the English translation of: " + word.name() + "?");
+
+        // ---- Check the answer ----
+        if (playerInput.equals(word.definition())) {
+            JOptionPane.showMessageDialog(null, "Correct! The English translation of " + word.name() + " is " + word.definition());
+            score++;
+        } else {
+            JOptionPane.showMessageDialog(null, "Incorrect! The English translation of " + word.name() + " is " + word.definition());
+            incorrectAnswers++;
+        }
+        redrawGrid();
     }
 
     private gameType getGameType() {
@@ -93,6 +146,44 @@ public class GUI_Game {
       };
     }
 
+
+
+    // ------------------------------- Draw Methods -------------------------------
+    private void drawGrid() {
+        // ---- Create the frame and panel ----
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+        frame.setSize(500, 500);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+
+        // ---- Create the buttons ----
+        int numberOfCards = gameType == gameType.WORDS ? wordsList.size() : gameType == gameType.PHRASES ? phrasesList.size() : coloursList.size();
+        for (int i = 0; i < numberOfCards; i++) {
+            String cardName = gameType == gameType.WORDS ? wordsList.get(i).name() : gameType == gameType.PHRASES ? phrasesList.get(i).phrase() : coloursList.get(i).name();
+            JButton button = new JButton(cardName);
+            button.setAlignmentX(JButton.CENTER_ALIGNMENT);
+            button.addActionListener(e -> runTurn());
+            panel.add(button);
+        }
+        frame.add(panel);
+
+    }
+    
+    private void redrawGrid() {
+        panel.removeAll();
+        int numberOfCards = gameType == gameType.WORDS ? wordsList.size() : gameType == gameType.PHRASES ? phrasesList.size() : coloursList.size();
+        for (int i = 0; i < numberOfCards; i++) {
+            String cardName = gameType == gameType.WORDS ? wordsList.get(i).name() : gameType == gameType.PHRASES ? phrasesList.get(i).phrase() : coloursList.get(i).name();
+            JButton button = new JButton(cardName);
+            button.setAlignmentX(JButton.CENTER_ALIGNMENT);
+            button.addActionListener(e -> runTurn());
+            panel.add(button);
+        }
+        frame.add(panel);
+    }
+
+    // ----------------------------- Helper Methods -----------------------------
     private void setupPhrases() {
         phrasesList = new ArrayList<>();
         phrasesList.add(new Phrase("Kia ora", "Hello"));
@@ -131,37 +222,6 @@ public class GUI_Game {
         coloursList.add(new Colour("Kākāriki", "Green"));
         coloursList.add(new Colour("Kikorangi", "Blue"));
     }
-
-    private void drawGrid() {
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-        frame.setSize(500, 500);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-
-        int numberOfCards = gameType == gameType.WORDS ? wordsList.size() : gameType == gameType.PHRASES ? phrasesList.size() : coloursList.size();
-        for (int i = 0; i < numberOfCards; i++) {
-            JButton button = new JButton("Card " + i);
-            button.setAlignmentX(JButton.CENTER_ALIGNMENT);
-            panel.add(button);
-        }
-        frame.add(panel);
-
-
-
-    }
-    
-    private void redrawGrid() {
-        panel.removeAll();
-        int numberOfCards = gameType == gameType.WORDS ? wordsList.size() : gameType == gameType.PHRASES ? phrasesList.size() : coloursList.size();
-        for (int i = 0; i < numberOfCards; i++) {
-            JButton button = new JButton("Card " + i);
-            button.setAlignmentX(JButton.CENTER_ALIGNMENT);
-            panel.add(button);
-        }
-        frame.add(panel);
-    }
-
 
 
 }
