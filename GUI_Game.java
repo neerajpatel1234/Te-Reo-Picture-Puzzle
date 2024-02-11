@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,24 +15,19 @@ public class GUI_Game {
     private List<Word> wordsList;
     private List<Phrase> phrasesList;
     private List<Colour> coloursList;
+    enum gameType {WORDS, PHRASES, COLOURS }
+
     private int score;
     private int incorrectAnswers;
 
 
-
-
-
     // ------------------------------- Constructor -------------------------------
+    /**
+     * Constructor for the GUI_Game class
+     */
     public GUI_Game() {
         setupGame();
     }
-
-
-
-    public void startGame() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
 
     private void setupGame() {
         wordsList = new ArrayList<>();
@@ -42,6 +38,49 @@ public class GUI_Game {
         setupWords();
         setupPhrases();
         setupColours();
+        startGame();
+    }
+
+    public void startGame() {
+        // ---- Ask the user to select a game type ----
+        gameType gameType = getGameType();
+
+        // ---- Create the GUI ----
+        JFrame frame = new JFrame("Te Reo Picture Game");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+
+        // ---- Create the buttons ----
+        JButton button1 = new JButton("Start Game");
+        JButton button2 = new JButton("Exit Game");
+        button1.setAlignmentX(JButton.CENTER_ALIGNMENT);
+        button2.setAlignmentX(JButton.CENTER_ALIGNMENT);
+
+        // ---- Add action listeners to the buttons ----
+        button1.addActionListener(e -> startGame());
+        button2.addActionListener(e -> System.exit(0));
+
+        frame.add(button1);
+        frame.add(button2);
+
+        // ---- Set the frame size and location ------
+        frame.setSize(250, 90);
+        frame.setLocationRelativeTo(null);
+
+
+
+    }
+
+    private gameType getGameType() {
+        String[] options = {"Words", "Phrases", "Colours"};
+        int choice = JOptionPane.showOptionDialog(null, "Please select a game type", "Game Type",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+      return switch (choice) {
+        case 0 -> gameType.WORDS;
+        case 1 -> gameType.PHRASES;
+        case 2 -> gameType.COLOURS;
+        default -> throw new IllegalArgumentException("Invalid game type selected");
+      };
     }
 
     private void setupPhrases() {
@@ -84,9 +123,8 @@ public class GUI_Game {
     }
 
     private void drawGrid() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 
+    }
 
 
 
