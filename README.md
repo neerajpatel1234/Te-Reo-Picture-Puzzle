@@ -10,7 +10,9 @@ In the end, the outcome is a game that cleverly blends learning and enjoyment, g
 ## Screenshots of the Application 
 - <img width="750" alt="image" src="https://github.com/neerajpatel1234/Te-Reo-Picture-Puzzle/assets/114114241/27a0e125-5e94-4c8c-b5e3-105078bc73a0">
 
-- <img width="750" alt="image" src="https://github.com/neerajpatel1234/Te-Reo-Picture-Puzzle/assets/114114241/e9cd76bc-7ea8-4539-9603-8f398527847f">
+- <img width="400" alt="image" src="https://github.com/neerajpatel1234/Te-Reo-Picture-Puzzle/assets/114114241/e9cd76bc-7ea8-4539-9603-8f398527847f">
+- <img width="500" alt="image" src="https://github.com/neerajpatel1234/Te-Reo-Picture-Puzzle/assets/114114241/4a67634e-4da4-4241-911d-f94b845a21dd">
+
 
 
 ## Language and Tools 
